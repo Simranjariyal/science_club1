@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Curtain</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrollbars during the curtain animation */
+            background-color: #333; /* Dark background to contrast with white text */
+            text-align: center;
+        }
+        
+        #container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+            z-index: 30; /* Ensure content is above the curtain */
+        }
+
+        h1 {
+            font-size: 24px;
+            color: white; /* White font color */
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50; /* Button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 20; /* Behind the button but in front of the link */
+        }
+        
+        #curtainLeft, #curtainRight {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: darkred; /* Dark red color for the curtain */
+            transition: transform 1s ease;
+        }
+        
+        #curtainLeft {
+            left: 0;
+            transform: translateX(0);
+        }
+        
+        #curtainRight {
+            right: 0;
+            transform: translateX(0);
+        }
+        
+        #curtain.open #curtainLeft {
+            transform: translateX(-100%);
+        }
+        
+        #curtain.open #curtainRight {
+            transform: translateX(100%);
+        }
+        
+        #linkContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10; /* Ensure it's visible after the curtain animation */
+            background: white; /* Background color for the link box */
+            padding: 20px;
+            border-radius: 10px;
+            display: none; /* Initially hidden */
+        }
+        
+        #linkContainer a {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+            background-color: #4CAF50; /* Button color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="welcomeText">Welcome to Student Clubs HPTU</h1>
+        <button id="startAnimationButton">Click Me</button>
+    </div>
+    <div id="curtain">
+        <div id="curtainLeft"></div>
+        <div id="curtainRight"></div>
+    </div>
+    <div id="linkContainer">
+        <a href="https://pranjalsharma05.github.io/SciTech/" target="_blank">Open Science Club Website</a>
+    </div>
+
+    <script>
+        document.getElementById('startAnimationButton').addEventListener('click', () => {
+            const curtain = document.getElementById('curtain');
+            const linkContainer = document.getElementById('linkContainer');
+            const welcomeText = document.getElementById('welcomeText');
+            const startButton = document.getElementById('startAnimationButton');
+            
+            curtain.classList.add('open');
+        
+            // Hide the heading and button after the curtain animation starts
+            setTimeout(() => {
+                welcomeText.classList.add('fade-out');
+                startButton.classList.add('fade-out');
+            }, 1000); // Time should match the CSS transition duration
+            
+            // Show the link after the curtain is fully open
+            setTimeout(() => {
+                linkContainer.style.display = 'block'; // Ensure it's visible
+            }, 1000); // Time should match the CSS transition duration
+        });
+    </script>
+</body>
+</html>
